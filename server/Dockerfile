@@ -15,8 +15,7 @@ COPY tsconfig.json ./user
 WORKDIR user
 
 RUN npm install
-#RUN npm install -g typescript
-#RUN npm run compile
+RUN npm run compile
 
 EXPOSE 3000
 

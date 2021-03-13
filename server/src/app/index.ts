@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 
 routes(app);
 
-const port = 3000;
+const port = 3001;
 
 app.get('/', (req, res) => {
     res.send('Up!');
