@@ -82,6 +82,17 @@ const register = async(req: Request, res: Response, next: any) => {
     }
 }
 
+const authenticate = async(req: Request, res: Response, next: any) => {
+    try{
+        return await controller.authenticate(req, res);
+    } catch (e){
+        if(e instanceof ClientError){
+            next(e);
+        }
+        next(new ServerError(e.message));
+    }
+}
+
 export default (app: core.Express) => {
     router.route('/')
         .post(
@@ -91,6 +102,11 @@ export default (app: core.Express) => {
     router.route('/register')
         .post(
             register,
+        );
+
+    router.route('/authenticate')
+        .post(
+            authenticate,
         );
 
     router.route('/external')

@@ -1,6 +1,6 @@
 import { BindService, UserModel, UserSchema } from '../../../lib';
 import * as mongoose from 'mongoose';
-import {User, UserRole} from "user-transport";
+import { User, UserRole } from '../../../lib/models/user';
 
 @BindService
 export class UserRepository {

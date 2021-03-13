@@ -1,8 +1,7 @@
 import {InjectValue} from 'typescript-ioc';
 import {Request, Response} from 'express';
-import {User, UserRole} from 'user-transport';
+import { User, UserRole } from '../../../lib/models/user';
 import {BadRequestClientError, ok} from '../../../lib/http';
-import {HttpStatusCode} from '../../../lib/http/http-status-codes';
 import {UserService} from './user-service';
 
 export class UserController {
@@ -27,6 +26,14 @@ export class UserController {
         user.role = UserRole.INTERNAL;
 
         const result = await this.service.create(user);
+
+        return ok(result, res);
+    }
+
+    public async authenticate(req: Request, res: Response) {
+        const credentials: { email: string, passwordEncrypted: string } = req.body;
+
+        const result = await this.service.authenticate(credentials);
 
         return ok(result, res);
     }

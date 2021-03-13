@@ -1,13 +1,33 @@
-import { BindService, UserModel } from '../../../lib';
+import {BindService, jwtSecret, UserModel} from '../../../lib';
 import { UserRepository } from './user-repository';
 import { InjectValue } from 'typescript-ioc';
-import { User } from 'user-transport';
+import { User } from '../../../lib/models/user';
 import {ConflictClientError, NotFoundClientError} from '../../../lib/http';
+import jwt from 'jsonwebtoken';
 
 @BindService
 export class UserService {
     @InjectValue('UserRepository')
     private readonly userRepository: UserRepository;
+
+    public async authenticate(credentials: { email: string, passwordEncrypted: string }) {
+        const resp: any = await this.getByEmail(credentials.email);
+        if(!resp){
+            throw new ConflictClientError('Wrong Credentials!');
+        }
+        const user: any = resp._doc;
+        if(user.passwordEncrypted === credentials.passwordEncrypted){
+            const token = jwt.sign({
+                id: user._id,
+                email: user.email,
+                role: user.role,
+            }, jwtSecret, { expiresIn: '7d'});
+            return {
+                token
+            }
+        }
+        throw new ConflictClientError('Wrong Credentials!');
+    }
 
     public async create(user: User) {
         const resp = await this.getByEmail(user.email);

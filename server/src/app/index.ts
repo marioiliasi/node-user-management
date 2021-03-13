@@ -4,6 +4,7 @@ import cors from 'cors';
 import { connect } from '../lib/persistence/index';
 import routes from './routes';
 import {error} from "../lib/http";
+import jwt from "../lib/http/jwt-middleware";
 const app = express();
 
 app.use(cors());
@@ -11,6 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false,
 }));
+
+app.use(jwt());
 
 routes(app);
 
