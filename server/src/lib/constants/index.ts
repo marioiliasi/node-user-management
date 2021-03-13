@@ -1,3 +1,1 @@
-export enum Routes {
-    USER = '/user',
-}
+export * from './routes';

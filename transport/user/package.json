@@ -1,0 +1,13 @@
+{
+  "name": "user-transport",
+  "version": "0.0.1",
+  "description": "User interface",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.2"
+  },
+  "types": "index",
+  "main": "index"
+}
