@@ -3,6 +3,18 @@ import {User} from "../services/user";
 
 export function users(state: any = {}, action: any) {
     switch (action.type) {
+        case userConstants.GETBYID_REQUEST:
+            return {
+                loading: true
+            };
+        case userConstants.GETBYID_SUCCESS:
+            return {
+                item: action.user
+            };
+        case userConstants.GETBYID_FAILURE:
+            return {
+                error: action.error
+            };
         case userConstants.GETALL_REQUEST:
             return {
                 loading: true

@@ -1,6 +1,6 @@
 import { authHeader } from '../helpers';
 import {User} from "./user";
-
+import jwt from 'jsonwebtoken';
 const apiUrl: string = 'http://localhost:3001';
 
 export const userService = {
@@ -22,17 +22,19 @@ function login(email: string, password: string) {
 
     return fetch(`${apiUrl}/users/authenticate`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(resp => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-
-            return user;
+            localStorage.setItem('token', JSON.stringify(resp.token));
+            const user: any = jwt.decode(resp.token, {complete: true});
+            localStorage.setItem('user', JSON.stringify(user.payload));
+            return user.payload;
         });
 }
 
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
 }
 
 function getAllExternal() {

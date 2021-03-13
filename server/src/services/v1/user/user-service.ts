@@ -20,6 +20,8 @@ export class UserService {
             const token = jwt.sign({
                 id: user._id,
                 email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 role: user.role,
             }, jwtSecret, { expiresIn: '7d'});
             return {

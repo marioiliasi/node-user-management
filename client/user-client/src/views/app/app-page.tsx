@@ -8,6 +8,8 @@ import { PrivateRoute } from '../../components';
 import { HomePage } from '../home';
 import { LoginPage } from '../login';
 import { RegisterPage } from '../register';
+import {UserRole} from "../../services/user";
+import {UsersPage} from "../users";
 
 function App() {
     const alert = useSelector((state: any) => state.alert);
@@ -30,6 +32,7 @@ function App() {
                     <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />
+                            <PrivateRoute path="/users" roles={[UserRole.EXTERNAL]} component={UsersPage} />
                             <Route path="/login" component={LoginPage} />
                             <Route path="/register" component={RegisterPage} />
                             <Redirect from="*" to="/" />
