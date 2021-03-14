@@ -10,8 +10,8 @@ export interface User {
   passwordEncrypted: string,
   role: UserRole,
   deleted?: boolean,
-  createdAt: Date;
-  createdUser: string;
+  createdAt?: Date;
+  createdUser?: string;
   updatedAt?: Date;
   updatedUser?: string;
   deletedAt?: Date;

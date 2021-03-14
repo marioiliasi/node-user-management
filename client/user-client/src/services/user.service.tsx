@@ -9,6 +9,7 @@ export const userService = {
     register,
     getAllExternal,
     getById,
+    create,
     update,
     delete: _delete
 };
@@ -63,6 +64,16 @@ function register(user: string) {
     };
 
     return fetch(`${apiUrl}/users/register`, requestOptions).then(handleResponse);
+}
+
+function create(user: User) {
+    const requestOptions: any = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    };
+
+    return fetch(`${apiUrl}/users`, requestOptions).then(handleResponse);;
 }
 
 function update(user: User) {

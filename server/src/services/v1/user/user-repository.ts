@@ -12,7 +12,7 @@ export class UserRepository {
     }
 
     async update(item: User): Promise<mongoose.Document | null> {
-        await this.model.updateOne({_id: item._id, deleted: false}, new UserModel(item));
+        await this.model.updateOne({_id: item._id, deleted: false}, new UserModel(item), {upsert: true});
         return await this.findOneActiveById(item._id);
     }
 

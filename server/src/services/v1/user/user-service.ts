@@ -47,7 +47,7 @@ export class UserService {
             throw new NotFoundClientError('The user you are trying to update does no exist');
         }
         resp = await this.getByEmail(user.email);
-        if(resp){
+        if(resp && resp._id.toString() !== user._id){
             throw new ConflictClientError('The email already exist');
         }
 
@@ -74,6 +74,13 @@ export class UserService {
     }
 
     public async getExternalUsers() {
-        return await this.userRepository.findActiveExternalUsers();
+        let users = await this.userRepository.findActiveExternalUsers();
+        if(users){
+            users = users.map((user: any) => {
+                delete user._doc.passwordEncrypted;
+                return user;
+            })
+        }
+        return users;
     }
 }

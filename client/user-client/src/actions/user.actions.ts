@@ -2,14 +2,33 @@ import { userConstants } from '../constants';
 import { userService } from '../services';
 import { alertActions } from './';
 import { history } from '../helpers';
+import {User} from "../services/user";
 
 export const userActions = {
     login,
     logout,
     register,
     getAllExternal,
+    addEmpty,
     getById,
+    create,
+    refresh,
+    update,
+    _delete,
 };
+
+function addEmpty(user: User){
+    return {
+        type: userConstants.ADD_EMPTY,
+        user
+    };
+}
+function refresh(user: User){
+    return {
+        type: userConstants.REFRESH,
+        user
+    };
+}
 
 function login(email: string, password: string, from: any) {
     return (dispatch: any) => {
@@ -93,16 +112,51 @@ function getById(id: string) {
     function failure(error: any) { return { type: userConstants.GETBYID_FAILURE, error } }
 }
 
-// prefixed function name with underscore because delete is a reserved word in javascript
+function create(user: User) {
+    return (dispatch: any) => {
+        dispatch(request(user));
+
+        userService.create(user)
+            .then(
+                user => dispatch(success(user)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request(user: User) { return { type: userConstants.CREATE_REQUEST, user } }
+    function success(user: User) { return { type: userConstants.CREATE_SUCCESS, user } }
+    function failure(error: any) { return { type: userConstants.CREATE_FAILURE, error } }
+}
+
+function update(user: User) {
+    return (dispatch: any) => {
+        dispatch(request(user));
+
+        userService.update(user)
+            .then(
+                user => dispatch(success(user)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request(user: User) { return { type: userConstants.UPDATE_REQUEST, user } }
+    function success(user: User) { return { type: userConstants.UPDATE_SUCCESS, user } }
+    function failure(error: any) { return { type: userConstants.UPDATE_FAILURE, error } }
+}
+
 function _delete(id: string) {
     return (dispatch: any) => {
-        dispatch(request(id));
+        if(id){
+            dispatch(request(id));
 
-        userService.delete(id)
-            .then(
-                user => dispatch(success(id)),
-                error => dispatch(failure(id, error.toString()))
-            );
+            userService.delete(id)
+                .then(
+                    user => dispatch(success(id)),
+                    error => dispatch(failure(id, error.toString()))
+                );
+        } else {
+            dispatch(success(id));
+        }
     };
 
     function request(id: string) { return { type: userConstants.DELETE_REQUEST, id } }
