@@ -1,5 +1,5 @@
 import * as core from 'express-serve-static-core';
-import userRoutes from '../lib/routes/user-routes';
+import userRoutes from './user-routes';
 
 export default (app: core.Express) => {
     userRoutes(app);

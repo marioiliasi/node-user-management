@@ -1,10 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connect } from '../lib/persistence/index';
+import { LOGGER, connect, error } from '../lib';
 import routes from './routes';
-import {error} from "../lib/http";
-import jwt from "../lib/http/jwt-middleware";
+import jwt from '../lib/http/jwt-middleware';
+
 const app = express();
 
 app.use(cors());
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, async () => {
-    console.log(`User app listening at http://localhost:${port}`);
+    LOGGER.info(`User app listening at http://localhost:${port}`);
     await connect();
 });
 app.use(error);

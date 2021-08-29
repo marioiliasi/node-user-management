@@ -1,6 +1,6 @@
 export enum UserRole {
-  INTERNAL = "internal",
-  EXTERNAL = "external",
+  INTERNAL = 'internal',
+  EXTERNAL = 'external',
 }
 export interface User {
   _id: string,

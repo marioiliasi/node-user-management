@@ -29,6 +29,7 @@ module.exports = {
                 new: { before: false },
             },
         }],
+        'no-underscore-dangle': [0]
     },
     overrides: [
         { files: '*.test.ts', rules: { 'max-lines': 'off' } },

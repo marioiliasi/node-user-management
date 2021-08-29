@@ -1,4 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
+import { LOGGER } from '../logger';
 import { HttpStatusCode } from './http-status-codes';
 
 export abstract class ClientError extends Error {
@@ -10,7 +11,7 @@ export abstract class ClientError extends Error {
     super(JSON.stringify(description));
     this.statusCode = statusCode;
     this.description = description;
-    console.log(`ClientError: ${this.stack}`);
+    LOGGER.info(`ClientError: ${this.stack}`);
   }
 }
 

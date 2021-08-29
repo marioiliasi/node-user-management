@@ -1,8 +1,8 @@
-import {InjectValue} from 'typescript-ioc';
-import {Request, Response} from 'express';
+import { InjectValue } from 'typescript-ioc';
+import { Request, Response } from 'express';
+import { BadRequestClientError, ok } from '../../../lib';
 import { User, UserRole } from '../../../lib/models/user';
-import {BadRequestClientError, ok} from '../../../lib/http';
-import {UserService} from './user-service';
+import { UserService } from './user-service';
 
 export class UserController {
     @InjectValue('UserService')

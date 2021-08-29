@@ -22,14 +22,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "@user/*": ["src/services/*"],
-      "@lib": ["src/lib"],
-      "@http": ["src/lib/http"],
-      "@persistence": ["src/lib/persistence"],
-      "@app": ["src/app"]
-    }
+    "baseUrl": "."
   },
   "include": [
     "src/**/*"

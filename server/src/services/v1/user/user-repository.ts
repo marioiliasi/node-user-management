@@ -1,5 +1,5 @@
-import { BindService, UserModel, UserSchema } from '../../../lib';
 import * as mongoose from 'mongoose';
+import { BindService, UserModel } from '../../../lib';
 import { User, UserRole } from '../../../lib/models/user';
 
 @BindService
@@ -12,17 +12,17 @@ export class UserRepository {
     }
 
     async update(item: User): Promise<mongoose.Document | null> {
-        await this.model.updateOne({_id: item._id, deleted: false}, new UserModel(item), {upsert: true});
-        return await this.findOneActiveById(item._id);
+        await this.model.updateOne({ _id: item._id, deleted: false }, new UserModel(item), { upsert: true });
+        return this.findOneActiveById(item._id);
     }
 
     async softDelete(item: User): Promise<mongoose.Document | null> {
-        await this.model.findOneAndUpdate({_id: item._id, deleted: false}, new UserModel(item));
-        return await this.findById(item._id);
+        await this.model.findOneAndUpdate({ _id: item._id, deleted: false }, new UserModel(item));
+        return this.findById(item._id);
     }
 
     async findOneActiveById(id: string): Promise<mongoose.Document | null> {
-        return this.model.findOne({_id: id, deleted: false});
+        return this.model.findOne({ _id: id, deleted: false });
     }
 
     async findById(id: string): Promise<mongoose.Document | null> {
@@ -34,7 +34,6 @@ export class UserRepository {
     }
 
     async findActiveExternalUsers(): Promise<mongoose.Document[] | null> {
-        return this.model.find({role:UserRole.EXTERNAL, deleted: false});
+        return this.model.find({ role: UserRole.EXTERNAL, deleted: false });
     }
-
 }
