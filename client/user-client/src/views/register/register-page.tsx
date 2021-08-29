@@ -43,36 +43,36 @@ function RegisterPage() {
             <h2>Register</h2>
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>First Name</label>
+                    <label>First Name*</label>
                     <input type="text" name="firstName" value={user.firstName} onChange={handleChange} className={'form-control' + (submitted && !user.firstName ? ' is-invalid' : '')} />
                     {submitted && !user.firstName &&
-                    <div className="invalid-feedback">First Name is required</div>
+                    <div className="invalid-feedback" style={{ color: 'red' }}>First Name is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Last Name</label>
+                    <label>Last Name*</label>
                     <input type="text" name="lastName" value={user.lastName} onChange={handleChange} className={'form-control' + (submitted && !user.lastName ? ' is-invalid' : '')} />
                     {submitted && !user.lastName &&
-                    <div className="invalid-feedback">Last Name is required</div>
+                    <div className="invalid-feedback" style={{ color: 'red' }}>Last Name is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Email</label>
+                    <label>Email*</label>
                     <input type="text" name="email" value={user.email} onChange={handleChange} className={'form-control' + (submitted && !user.email ? ' is-invalid' : '')} />
                     {submitted && !user.email &&
-                    <div className="invalid-feedback">Email is required</div>
+                    <div className="invalid-feedback" style={{ color: 'red' }}>Email is required</div>
                     }
                 </div>
                 <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" value={user.passwordEncrypted} onChange={handleChange} className={'form-control' + (submitted && !user.passwordEncrypted ? ' is-invalid' : '')} />
+                    <label>Password*</label>
+                    <input type="password" name="passwordEncrypted" value={user.passwordEncrypted} onChange={handleChange} className={'form-control' + (submitted && !user.passwordEncrypted ? ' is-invalid' : '')} />
                     {submitted && !user.passwordEncrypted &&
-                    <div className="invalid-feedback">Password is required</div>
+                    <div className="invalid-feedback" style={{ color: 'red' }}>Password is required</div>
                     }
                 </div>
                 <div className="form-group">
                     <button className="btn btn-primary">
-                        {registering && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                        {registering && <span className="spinner-border spinner-border-sm mr-1"/>}
                         Register
                     </button>
                     <Link to="/login" className="btn btn-link">Cancel</Link>

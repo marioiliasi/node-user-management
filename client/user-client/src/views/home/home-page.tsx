@@ -17,19 +17,23 @@ function HomePage() {
 
     return (
         <div className="col-lg-8 offset-lg-2">
+            <div className="links">
+                <Link to={`/`} className="link">Home</Link>&nbsp;
+                <Link to={`/users`} className="link">Users</Link>
+            </div>
             <h1>Hi {user.firstName}!</h1>
             <h3>Current User's data: </h3>
             {currentUser.loading && <em>Loading data...</em>}
             {currentUser.error && <span className="text-danger">ERROR: {currentUser.error}</span>}
             {currentUser.item &&
-            <p>
-              <p>First Name: {currentUser.item.firstName}</p>
-              <p>Last Name: {currentUser.item.lastName}</p>
-            </p>
+            <div>
+              <div>First Name: {currentUser.item.firstName}</div>
+              <div>Last Name: {currentUser.item.lastName}</div>
+            </div>
             }
-            <p>
+            <div>
                 <Link to="/login">Logout</Link>
-            </p>
+            </div>
         </div>
     );
 }

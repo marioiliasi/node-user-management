@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import {Router, Route, Switch, Redirect, Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../../helpers';
@@ -32,7 +32,7 @@ function App() {
                     <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />
-                            <PrivateRoute path="/users" roles={[UserRole.EXTERNAL]} component={UsersPage} />
+                            <PrivateRoute path="/users" roles={[UserRole.INTERNAL]} component={UsersPage} />
                             <Route path="/login" component={LoginPage} />
                             <Route path="/register" component={RegisterPage} />
                             <Redirect from="*" to="/" />

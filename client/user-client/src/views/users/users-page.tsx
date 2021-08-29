@@ -84,6 +84,10 @@ function UsersPage() {
 
     return (
         <div className="col-lg-8 offset-lg-2">
+            <div className="links">
+                <Link to={`/`} className="link">Home</Link>&nbsp;
+                <Link to={`/users`} className="link">Users</Link>
+            </div>
             <h1>Hi {user.firstName}!</h1>
             <h3>All external registered users:</h3>
             <table>
@@ -154,9 +158,9 @@ function UsersPage() {
                 <button id={user._id + 'add'} className="button muted-button" onClick={() => addUser()}>Add</button>
                 </tbody>
             </table>
-            <p>
+            <div>
                 <Link to="/login">Logout</Link>
-            </p>
+            </div>
         </div>
     );
 }
